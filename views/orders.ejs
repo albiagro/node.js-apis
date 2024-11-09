@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title>Orizon | Orders</title>
+    <script src="/assets/orders.js" async></script>
+  </head>
+  <body>
+    <h1>Orders</h1>
+
+    <a href="/orders/create">Create a new order</a>
+
+    <h3>Filter</h3>
+    <form>
+      <input
+        id="filterDate"
+        type="date"
+        name="date"
+        placeholder="Enter date..."
+      />
+      <input
+        id="filterProduct"
+        type="text"
+        name="product"
+        placeholder="Enter product name..."
+      />
+      <button id="btnSearch" type="submit">Confirm</button> 
+      <button><a href="/orders">Remove filter</a></button>  
+    </form>
+
+    <h3>Current orders:</h3>
+    <ul id="ordersList">
+        <% for(var i=0; i < orders.length; i++){ %>
+            <li>Order id: <%= orders[i].id %> - Creation date: <%= orders[i].date %> <button class="details" data-doc="<%= orders[i]._id %>">View details</button> <button class="update" data-doc="<%= orders[i]._id %>">Edit</button> <button class="delete" data-doc="<%= orders[i]._id %>">Delete</button></li>
+        <% } %>
+    </ul>
+  </body>
+</html>

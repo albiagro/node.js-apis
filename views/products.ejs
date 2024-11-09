@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>Orizon | Products</title>
+    <script src="/assets/products.js" async></script>
+  </head>
+  <body>
+    <h1>Products</h1>
+
+    <h3>Add a new product</h3>
+    <form action="/products" method="POST">
+      <input
+        id="insertValue"
+        type="text"
+        name="name"
+        placeholder="Enter product name..."
+        required
+      />
+      <input
+        id="insertPrice"
+        type="text"
+        name="price"
+        placeholder="Enter product price..."
+        required
+      />
+      <button type="submit">Confirm</button>      
+    </form>
+
+    <h3>Update product price</h3>
+    <form>
+      <input
+        id="updateValue"
+        type="text"
+        name="name"
+        placeholder="Enter product name..."
+        required
+      />
+      <input
+        id="updatePrice"
+        type="text"
+        name="price"
+        placeholder="Enter product price..."
+        required
+      />
+      <button id="btnUpdate" type="submit">Confirm</button>      
+    </form>
+
+    <h3>Current products:</h3>
+    <ul id="productsList">
+        <% for(var i=0; i < products.length; i++){ %>
+            <li>Name: <%= products[i].name %> - Price: <%= products[i].price %> <button class="delete" data-doc="<%= products[i]._id %>">Delete</button></li>
+        <% } %>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Orizon | Order update</title>
+    <script src="/assets/orderUpdate.js" async></script>
+  </head>
+  <body>
+    <h1>Update n. <%= data.order._id %></h1>
+
+    <h3>Add users</h3>
+    <% for(var i=0; i < data.users.length; i++){ %>
+      <li>
+        Name: <%= data.users[i].name %> - Surname: <%= data.users[i].surname %> - Email: <%= data.users[i].email %> 
+        <input type="checkbox" id="<%= data.users[i]._id %>" name="addUser" value="add">
+        <label for="addUser"> Add </label>
+      </li> 
+  <% } %>
+
+    <h3>Add products</h3>
+    <% for(var i=0; i < data.products.length; i++){ %>
+      <li>
+        Name: <%= data.products[i].name %> - Price: <%= data.products[i].price %>
+        <input type="text" id="qty-<%= data.products[i]._id %>" name="quantity" placeholder="Enter product quantity..." />
+        <input type="checkbox" id="<%= data.products[i]._id %>" name="addProduct" value="add">
+        <label for="addProduct"> Add </label>
+      </li>
+  <% } %>
+    </br>
+    <button id="btnConfirm" data-doc="<%= data.order._id %>">Confirm</button>
+  </body>
+</html>

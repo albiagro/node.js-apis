@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <title>Orizon | Users</title>
+    <script src="/assets/users.js" async></script>
+  </head>
+  <body>
+    <h1>Users</h1>
+
+    <h3>Add a new user</h3>
+    <form action="/users" method="POST">
+      <input
+        id="insertName"
+        type="text"
+        name="name"
+        placeholder="Enter user name..."
+        required
+      />
+      <input
+        id="insertSurname"
+        type="text"
+        name="surname"
+        placeholder="Enter user surname..."
+        required
+      />
+      <input
+        id="insertEmail"
+        type="text"
+        name="email"
+        placeholder="Enter user email..."
+        required
+      />
+      <button type="submit">Confirm</button>      
+    </form>
+
+    <h3>Update user email</h3>
+    <form>
+      <input
+        id="updateName"
+        type="text"
+        name="name"
+        placeholder="Enter user name..."
+        required
+      />
+      <input
+        id="updateSurname"
+        type="text"
+        name="surname"
+        placeholder="Enter user surname..."
+        required
+      />
+      <input
+        id="updateEmail"
+        type="text"
+        name="email"
+        placeholder="Enter user email..."
+        required
+      />
+      <button id="btnUpdate" type="submit">Confirm</button>      
+    </form>
+
+    <h3>Current users:</h3>
+    <ul id="usersList">
+        <% for(var i=0; i < users.length; i++){ %>
+            <li>Name: <%= users[i].name %> - Surname: <%= users[i].surname %> - Email: <%= users[i].email %> <button class="delete" data-doc="<%= users[i]._id %>">Delete</button></li> 
+        <% } %>
+    </ul>
+  </body>
+</html>
