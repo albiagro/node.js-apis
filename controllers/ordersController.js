@@ -1,9 +1,9 @@
 var bodyparser = require('body-parser');
 var urlencodedParser = bodyparser.urlencoded({extended: false});
-var ConnectDB = require('../public/assets/DBConnection.js');
-var DBModels = require('../public/assets/DBModels.js');
+var ConnectDB = require('../public/assets/backend/DBConnection.js');
+var DBModels = require('../models/DBModels.js');
 
-ConnectDB()
+await ConnectDB() // in order to not run APIs before to be connected to DB
 
 async function GetUsersFromDb(usersIDs) { 
   var tempUsers = []  
@@ -131,7 +131,7 @@ module.exports = function (app) {
       });
   });  
 
-  app.get("/orders/:id", async function (req, res) {
+  app.get("/orders/:id", function (req, res) {
     const id = req.params.id;
 
     var order = DBModels.Order.findById(id)
