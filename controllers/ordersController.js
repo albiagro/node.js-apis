@@ -146,17 +146,19 @@ module.exports = function (app) {
     const users = await GetUsersFromDb(req.body.usersIDs)
     const rows = await GetProductsFromDb(req.body.rows)
 
-    // Update data from mongoDB
-    DBModels.Order.updateOne(
+    try {
+      // Update data from mongoDB
+    await DBModels.Order.updateOne(
       { _id: req.params.id },
       { users: users, rows: rows }
     )
-      .then(function (data) {
-        res.redirect("/orders/:id");
-      })
-      .catch(function (err) {
-        throw err;
-      }); 
+
+    res.redirect("/orders/:id");
+
+    } catch (error) {
+      throw error;
+    }
+
   })
 
   app.delete("/orders/:id", function (req, res) {
