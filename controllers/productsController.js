@@ -2,8 +2,6 @@ var bodyparser = require("body-parser");
 var ConnectDB = require("../public/assets/backend/DBConnection.js");
 var DBModels = require('../models/DBModels.js');
 
-await ConnectDB(); // in order to not run APIs before to be connected to DB
-
 var urlencodedParser = bodyparser.urlencoded({ extended: false });
 var jsonParser = bodyparser.json();
 

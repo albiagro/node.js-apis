@@ -1,9 +1,6 @@
 var bodyparser = require('body-parser');
 var urlencodedParser = bodyparser.urlencoded({extended: false});
-var ConnectDB = require('../public/assets/backend/DBConnection.js');
 var DBModels = require('../models/DBModels.js');
-
-await ConnectDB() // in order to not run APIs before to be connected to DB
 
 async function GetUsersFromDb(usersIDs) { 
   var tempUsers = []  
@@ -112,23 +109,23 @@ module.exports = function (app) {
   app.post("/orders", jsonParser, async function (req, res) {
     // Get data from the view and add it to mongoDB     
     
-    const users = await GetUsersFromDb(req.body.usersIDs)
-    const rows = await GetProductsFromDb(req.body.rows)
+    try {
+      const users = await GetUsersFromDb(req.body.usersIDs)
+      const rows = await GetProductsFromDb(req.body.rows)
 
-    var orderToCreate = {
-      date: req.body.date,
-      users: users,
-      rows: rows
-    }
+      var orderToCreate = {
+        date: req.body.date,
+        users: users,
+        rows: rows
+      }
   
-    var newOrder = DBModels.Order(orderToCreate)
-      .save()
-      .then(function (data) {
-        res.redirect("/orders");
-      })
-      .catch(function (err) {
-        throw err;
-      });
+      await DBModels.Order(orderToCreate).save()
+
+      res.redirect("/orders");
+    } catch (error) {
+      throw error;
+    }  
+
   });  
 
   app.get("/orders/:id", function (req, res) {
